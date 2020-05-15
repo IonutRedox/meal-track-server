@@ -1,4 +1,5 @@
-﻿using MealTrackWebAPI.Models;
+﻿using MealTrackWebAPI.Helpers;
+using MealTrackWebAPI.Models;
 using MealTrackWebAPI.Models.Authentication;
 using MongoDB.Driver;
 using System;
@@ -21,17 +22,13 @@ namespace MealTrackWebAPI.Services
         public User SignIn(string email,string password)
         {
             if(string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password)) {
-                return null;
+                throw new AppException("Email or password are empty");
             }
 
             User user = _users.Find(user => true).ToList().SingleOrDefault(user => string.Equals(user.Email,email));
 
-            if(user == null) {
-                return null;
-            }
-
-            if(!string.Equals(user.Password,password)) {
-                return null;
+            if(user == null || !string.Equals(user.Password,password)) {
+                throw new AppException("Email or password is incorrect");
             }
 
             return user;
@@ -40,7 +37,7 @@ namespace MealTrackWebAPI.Services
         public User SignUp(User userIn)
         {
             if(_users.Find(user => true).ToList().Any(user => user.Email == userIn.Email)) {
-                throw new Exception("Email already exists");
+                throw new AppException("Email already exists");
             }
 
             _users.InsertOne(userIn);

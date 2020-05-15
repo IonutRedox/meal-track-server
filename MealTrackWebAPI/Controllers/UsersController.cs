@@ -1,4 +1,5 @@
 ﻿using System;
+using MealTrackWebAPI.Helpers;
 using MealTrackWebAPI.Models.Authentication;
 using MealTrackWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace MealTrackWebAPI.Controllers
             try {
                 _userService.SignUp(userIn);
                 return Ok();
-            } catch(Exception ex) {
+            } catch(AppException ex) {
                 return BadRequest(new { message = ex.Message });
             }
         }
@@ -30,17 +31,17 @@ namespace MealTrackWebAPI.Controllers
         [HttpPost("sign-in")]
         public IActionResult SignIn([FromBody]User userIn)
         {
-            User user = _userService.SignIn(userIn.Email,userIn.Password);
-
-            if(user == null) {
-                return BadRequest(new { message = "Email or password is incorrect" });
+            User user;
+            try {
+                user = _userService.SignIn(userIn.Email,userIn.Password);
+                return Ok(new {
+                    Email = user.Email,
+                    FullName = user.FullName,
+                    Token = new Guid().ToString()
+                });
+            } catch(AppException ex) {
+                return BadRequest(new { message = ex.Message });
             }
-
-            return Ok(new {
-                Email = user.Email,
-                FullName = user.FullName,
-                Token = new Guid().ToString()
-            });
         }
     }
 }
