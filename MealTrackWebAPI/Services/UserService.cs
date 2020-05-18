@@ -2,7 +2,6 @@
 using MealTrackWebAPI.Models;
 using MealTrackWebAPI.Models.Authentication;
 using MongoDB.Driver;
-using System;
 using System.Linq;
 
 namespace MealTrackWebAPI.Services

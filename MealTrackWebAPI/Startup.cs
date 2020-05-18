@@ -23,6 +23,7 @@ namespace MealTrackWebAPI
             services.Configure<MealTrackDatabaseSettings>(Configuration.GetSection(nameof(MealTrackDatabaseSettings)));
             services.AddSingleton<IMealTrackDatabaseSettings>(sp => sp.GetRequiredService<IOptions<MealTrackDatabaseSettings>>().Value);
             services.AddSingleton<UserService>();
+            services.AddSingleton<FoodService>();
             services.AddControllers();
             services.AddCors();
         }
