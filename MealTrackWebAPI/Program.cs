@@ -13,6 +13,7 @@ namespace MealTrackWebAPI
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {
+                    webBuilder.UseWebRoot("Content");
                     webBuilder.UseStartup<Startup>();
                 });
     }

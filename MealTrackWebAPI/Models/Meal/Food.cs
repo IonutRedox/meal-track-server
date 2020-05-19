@@ -26,5 +26,15 @@ namespace MealTrackWebAPI.Models.Meal
                 return FoodHelper.CalculateCalories(this);
             }
         }
+
+        public string ImagePath { get; set; }
+
+        public string Image
+        {
+            get {
+                return ImageHelper.ConvertImageToBase64String(string.Join(string.Empty,"food/",this.ImagePath));
+            }
+        }
+
     }
 }
