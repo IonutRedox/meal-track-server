@@ -1,11 +1,8 @@
-﻿using MealTrackWebAPI.Helpers;
-using MealTrackWebAPI.Models;
+﻿using MealTrackWebAPI.Models;
 using MealTrackWebAPI.Models.Meal;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MealTrackWebAPI.Services
 {
