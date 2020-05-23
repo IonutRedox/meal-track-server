@@ -35,6 +35,7 @@ namespace MealTrackWebAPI.Controllers
             try {
                 user = _userService.SignIn(userIn.Email,userIn.Password);
                 return Ok(new {
+                    Id = user.Id,
                     Email = user.Email,
                     FullName = user.FullName,
                     Token = new Guid().ToString()

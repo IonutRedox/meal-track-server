@@ -17,23 +17,25 @@ namespace MealTrackWebAPI.Controllers
             _mealService = mealService;
         }
 
-        [HttpGet]
-        public ActionResult<List<Meal>> Get()
+        [HttpGet("{userId:length(24)}")]
+        public ActionResult<List<Meal>> Get(string userId)
         {
-            return _mealService.Get();
+            return _mealService.GetMeals(userId);
         }
 
-        [HttpPost]
-        public ActionResult<Meal> Create([FromBody]Meal meal)
+        [HttpPost("{userId:length(24)}")]
+        public ActionResult<Meal> Create([FromBody]Meal meal,string userId)
         {
+            meal.UserId = userId;
             _mealService.Create(meal);
             return Ok(meal);
         }
 
-        [HttpPut]
-        public ActionResult<Meal> Update([FromBody]Meal mealIn)
+        [HttpPut("{userId:length(24)}")]
+        public ActionResult<Meal> Update([FromBody]Meal mealIn,string userId)
         {
-            var meal = _mealService.Get(mealIn.Id);
+            mealIn.UserId = userId;
+            var meal = _mealService.GetMeal(mealIn.Id);
 
             if(meal == null) {
                 return NotFound();
@@ -47,7 +49,7 @@ namespace MealTrackWebAPI.Controllers
         [HttpDelete("{id:length(24)}")]
         public ActionResult<Meal> Delete(string id)
         {
-            var meal = _mealService.Get(id);
+            var meal = _mealService.GetMeal(id);
 
             if(meal == null) {
                 return NotFound();

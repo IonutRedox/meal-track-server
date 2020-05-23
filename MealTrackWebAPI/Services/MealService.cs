@@ -18,12 +18,12 @@ namespace MealTrackWebAPI.Services
             _meals = database.GetCollection<Meal>("Meal");
         }
 
-        public List<Meal> Get()
+        public List<Meal> GetMeals(string userId)
         {
-            return _meals.Find(meal => true).ToList();
+            return _meals.Find(meal => meal.UserId == userId).ToList();
         }
 
-        public Meal Get(string id)
+        public Meal GetMeal(string id)
         {
             return _meals.Find<Meal>(meal => meal.Id == id).FirstOrDefault();
         }
