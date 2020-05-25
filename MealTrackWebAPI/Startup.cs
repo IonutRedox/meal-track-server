@@ -9,7 +9,6 @@ using MealTrackWebAPI.Services;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.StaticFiles;
 
 namespace MealTrackWebAPI
 {
@@ -29,6 +28,7 @@ namespace MealTrackWebAPI
             services.AddSingleton<UserService>();
             services.AddSingleton<FoodService>();
             services.AddSingleton<MealService>();
+            services.AddSingleton<StatisticsService>();
             services.AddDirectoryBrowser();
             services.AddControllers();
             services.AddCors();
