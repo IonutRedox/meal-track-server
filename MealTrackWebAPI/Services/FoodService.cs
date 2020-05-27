@@ -18,7 +18,7 @@ namespace MealTrackWebAPI.Services
             _foods = database.GetCollection<Food>("Food");
         }
 
-        public List<Food> Get() => _foods.Find(food => true).ToList();
+        public List<Food> GetFoods() => _foods.Find(food => true).ToList();
 
         public Food Get(string id) => _foods.Find(food => food.Id == id).FirstOrDefault();
     }

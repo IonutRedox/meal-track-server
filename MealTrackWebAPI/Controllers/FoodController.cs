@@ -19,7 +19,7 @@ namespace MealTrackWebAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Food>> Get() => _foodService.Get();
+        public ActionResult<List<Food>> Get() => _foodService.GetFoods();
 
         [HttpGet("{id:length(24)}",Name = "GetFood")]
         public ActionResult<Food> Get(string id)

@@ -43,5 +43,28 @@ namespace MealTrackWebAPI.Services
 
             return userIn;
         }
+
+        public User Update(string id,User userIn)
+        {
+            User userFound = _users.Find(user => true).ToList().SingleOrDefault(user => user.Id == id);
+
+            if(userFound == null) {
+                throw new AppException("User not found");
+            }
+
+            userIn.Id = userFound.Id;
+
+            if(string.IsNullOrWhiteSpace(userIn.ImagePath)) {
+                userIn.ImagePath = userFound.ImagePath;
+            }
+
+            if(string.IsNullOrWhiteSpace(userIn.Password)) {
+                userIn.Password = userFound.Password;
+            }
+
+            _users.ReplaceOne(user => user.Id == id,userIn);
+
+            return userIn;
+        }
     }
 }

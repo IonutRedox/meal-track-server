@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using MealTrackWebAPI.Helpers;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MealTrackWebAPI.Models.Authentication
@@ -15,5 +16,7 @@ namespace MealTrackWebAPI.Models.Authentication
         public string FullName { get; set; }
 
         public string Password { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }
